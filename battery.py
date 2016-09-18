@@ -113,7 +113,7 @@ bat_level = ReadChannel(bat_channel)
 led_state = 6
 led_state = LEDState(led_state,bat_level)
 
-# Define lists to make setting GPIO easy
+# Define lists for GPIO levels for a given LED State (make setting GPIO easy)
 io8  = [1,1,1,0,0,0,1]
 io10 = [1,0,0,0,1,1,1]
 io12 = [0,0,1,1,1,0,1]
