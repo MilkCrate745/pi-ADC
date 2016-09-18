@@ -123,7 +123,7 @@ def LEDState(ledold,vbat):
       lednew = ledtmp
   elif ledtmp > ledold and vbat > vthresh[ledtmp] + hyst and 1 <= ledtmp <= 5: # When battery is charging
       lednew = ledtmp
-  elif ledtmp = 0 or ledtmp = 6 and ledold != ledtmp: # Extreme states
+  elif ledtmp == 0 or ledtmp == 6 and ledold != ledtmp: # Extreme states
       lednew = ledtmp
   else: # No change. Either led = ledtmp or the hysterisis requirement was not met
       lednew = ledold
