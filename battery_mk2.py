@@ -135,6 +135,10 @@ def LEDState(ledold,vbat):
 # Define sensor channels
 bat_channel = 0
 
+# Define list for voltage thresholds
+#            0   1   2   3   4   5   6
+vthresh = [645,655,696,737,778,819,860]
+
 # Initial voltage reading
 bat_level = ReadChannel(bat_channel)
 
@@ -147,12 +151,8 @@ io8  = [1,1,1,0,0,0,1]
 io10 = [1,0,0,0,1,1,1]
 io12 = [0,0,1,1,1,0,1]
 
-# Define list for voltage thresholds
-#            0   1   2   3   4   5   6
-vthresh = [645,655,696,737,778,819,860]
-
-# Define delay between readings
-delay = 5
+# Define delay between readings (seconds)
+delay = 1
 
 """ Main loop
 """
@@ -160,7 +160,7 @@ while True:
 
   # Read the light sensor data
   bat_level = ReadChannel(bat_channel)
-  bat_volts = round(bat_level * 5 / 1024, 2)
+  bat_volts = round(bat_level * (5 / 1023), 2)
 
   # Calculate LED state
   led_state = LEDState(led_state,bat_level)
@@ -173,6 +173,7 @@ while True:
   # Print out results
   print "--------------------------------------------"
   print("Battery Voltage: {} ({}V)".format(bat_level,bat_volts))
+  print("LED State: {}".format(led_state))
 
   # Wait before repeating loop
   time.sleep(delay)
