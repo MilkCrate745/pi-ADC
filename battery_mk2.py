@@ -97,8 +97,25 @@ def ReadChannel(channel):
   #for i in range(ch):
     #values[i] = mcp.read_adc(i)
 
-  adc = mcp.read_adc(channel)
-  return adc
+  # Take a number of readings over time
+  smpl = 4
+  count = 0
+  adc[0] * (smpl + 1)
+  while count < smpl:
+      adc[count] = mcp.read_adc(channel)
+      time.sleep(delay)
+      count += 1
+
+  # Calculate the sum of all readings
+  count = 0
+  vbat = 0
+  while count < smpl:
+      vbat = vbat + adc[count]
+
+  # Average the value
+  vbat = vbat / smpl
+
+  return vbat
 
 # Function for calculating LED State
 def LEDState(ledold,vbat):
@@ -132,6 +149,10 @@ def LEDState(ledold,vbat):
 
 """ Defining golobal varables
 """
+
+# Define delay between readings (seconds)
+delay = 1
+
 # Define sensor channels
 bat_channel = 0
 
@@ -150,9 +171,6 @@ led_state = LEDState(led_state,bat_level)
 io8  = [1,1,1,0,0,0,1]
 io10 = [1,0,0,0,1,1,1]
 io12 = [0,0,1,1,1,0,1]
-
-# Define delay between readings (seconds)
-delay = 1
 
 """ Main loop
 """
